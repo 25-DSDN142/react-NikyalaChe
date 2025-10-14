@@ -18,11 +18,6 @@ function prepareInteraction() {
 function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
-  //image(eyeLashLeftImage, lashX, lashY, lashW, lashH);
-  image(eyeLashLeftImage, 130, 130);
-  image(eyeLashRightImage, 359, 359);
-  //image(eyeLashLeftImage, face.leftEye.keypoints[130].x, face.leftEye.keypoints[130].y);
-  //image(eyeLashRightImage, rightOuterCorner.x - lashW / 2, rightOuterCorner.y - lashH / 2, lashW, lashH);
 
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
@@ -118,16 +113,12 @@ function drawInteraction(faces, hands) {
     circle(leftEyeCenterX+2, leftEyeCenterY-2, leftEyeWidth*0.1);
     circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
    
-   
-   // eye lashes 
-      eyeLashLeftImage(face.leftEye.keypoints[130].x,face.leftEye.keypoints[130].y);
-      eyeLashRightImage(face.rightEye.keypoints[359].x,face.rightEye.keypoints[359].y);
 
-    //image(eyeLashLeftImage, lashX - lashW/2, lashY - lashH/2, lashW, lashH);
+
 
  //drawPoints(face.leftEye);
     drawPoints(face.leftEyebrow);
-    drawPoints(face.lips);
+    //drawPoints(face.lips);
     //drawPoints(face.rightEye);
     drawPoints(face.rightEyebrow);
     // drawPoints(face.faceOval);
@@ -141,6 +132,15 @@ function drawInteraction(faces, hands) {
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
+}
+
+function eyeFlowers(x,y) {
+  fill(getRandomColor()); // random color
+  ellipse(x, y, 30, 10);
+  ellipse(x, y, 10, 30);
+  fill(247, 149, 29); //orange
+  circle(x,y, 5); // middle of flower
+
 }
 
 function drawX(X, Y) {
@@ -162,7 +162,7 @@ function drawPoints(feature) {
     let element = feature.keypoints[i];
     noStroke();
     fill(217, 67, 172);
-    circle(element.x, element.y, 5);
+    eyeFlowers(element.x, element.y, 5);
   }
   pop()
 
