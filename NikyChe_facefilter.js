@@ -1,18 +1,22 @@
 // ----=  Faces  =----
 /* load images here */
 let myMeadowImage;
+let eyeLashLeftImage, eyeLashRightImage;
 
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
   myMeadowImage = loadImage('/images/meadowBackground.png');
-  
+  eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
+  eyeLashRightImage = loadImage('/images/eyeLashRight.png');
+
 
 }
 
 function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
+  //image(eyeLashLeftImage, lashX, lashY, lashW, lashH);
 
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
@@ -74,13 +78,14 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
-
+   // face outline
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
-   
+
+   // eyes
     noStroke();
-    fill(0)
+    fill(0); //outer eye - black
     ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
     ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
 
@@ -92,13 +97,13 @@ function drawInteraction(faces, hands) {
     circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.3);
     circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.3);
 
-    fill(255);
+    fill(255); //white highlight
     circle(leftEyeCenterX+2, leftEyeCenterY-2, leftEyeWidth*0.1);
     circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
-    // fill(get(leftEyeCenterX, leftEyeCenterY));
-    // circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth / 2);
-    // circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth / 2);
+   
+   
 
+    //image(eyeLashLeftImage, lashX - lashW/2, lashY - lashH/2, lashW, lashH);
 
  //drawPoints(face.leftEye);
     drawPoints(face.leftEyebrow);
