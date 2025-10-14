@@ -30,17 +30,7 @@ function drawInteraction(faces, hands) {
     if (showKeypoints) {
       drawPoints(face)
       
-      let leftLashPoint = face.leftEye.keypoints[226];
-      let rightLashPoint = face.rightEye.keypoints[446];
-
-      let lashLW = leftEyeWidth * 1.2;
-      let lashLH = leftEyeHeight * 0.6;
-      let lashRW = rightEyeWidth * 1.2;
-      let lashRH = rightEyeHeight * 0.6;
-
-      image(eyeLashLeftImage, leftLashPoint.x - lashLW / 2, leftLashPoint.y - lashLH / 2, lashLW, lashLH);
-      image(eyeLashRightImage, rightLashPoint.x - lashRW / 2, rightLashPoint.y - lashRH / 2, lashRW, lashRH);
-    }
+       }
 
 
 
@@ -104,6 +94,15 @@ function drawInteraction(faces, hands) {
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
+
+
+      let eyeLashLeftX = face.keypoints[113].x;
+      let eyeLashLeftY = face.keypoints[113].y;
+      let eyeLashRightX = face.keypoints[342].x;
+      let eyeLashRightY = face.keypoints[342].y;
+
+      image(eyeLashLeftImage, eyeLashLeftX - 20, eyeLashLeftY - 10, 80, 40);
+      image(eyeLashRightImage, eyeLashRightX - 20, eyeLashRightY - 10, 80, 40);
 
    // eyes
     noStroke();
