@@ -3,6 +3,8 @@
 let myMeadowImage;
 let eyeLashLeftImage, eyeLashRightImage;
 
+
+
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
@@ -17,15 +19,27 @@ function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
   //image(eyeLashLeftImage, lashX, lashY, lashW, lashH);
+  image(eyeLashLeftImage, 130, 130);
+  image(eyeLashRightImage, 359, 359);
+  //image(eyeLashLeftImage, face.leftEye.keypoints[130].x, face.leftEye.keypoints[130].y);
+  //image(eyeLashRightImage, rightOuterCorner.x - lashW / 2, rightOuterCorner.y - lashH / 2, lashW, lashH);
 
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
-    let face = faces[i]; // face holds all the keypoints of the face\
+    let face = faces[i]; // face holds all the keypoints of the face
     //console.log(face);
     if (showKeypoints) {
       drawPoints(face)
+      
     }
+
+
+
+
+    //image(eyeLashLeftImage, leftOuterCorner.x, leftOuterCorner.y);
+    //image(eyeLashRightImage, rightOuterCorner.x, rightOuterCorner.y);
+
 
     /*
     Once this program has a face, it knows some things about it.
@@ -74,6 +88,9 @@ function drawInteraction(faces, hands) {
 
     let noseTipX = face.keypoints[4].x;
     let noseTipY = face.keypoints[4].y;
+
+    let leftOuterCorner = face.leftEye.keypoints[130];
+    let rightOuterCorner = face.rightEye.keypoints[359];
     /*
     Start drawing on the face here
     */
@@ -102,6 +119,9 @@ function drawInteraction(faces, hands) {
     circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
    
    
+   // eye lashes 
+      eyeLashLeftImage(face.leftEye.keypoints[130].x,face.leftEye.keypoints[130].y);
+      eyeLashRightImage(face.rightEye.keypoints[359].x,face.rightEye.keypoints[359].y);
 
     //image(eyeLashLeftImage, lashX - lashW/2, lashY - lashH/2, lashW, lashH);
 
@@ -147,8 +167,6 @@ function drawPoints(feature) {
   pop()
 
 }
-
-
 
 
 
