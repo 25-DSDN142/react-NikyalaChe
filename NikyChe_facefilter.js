@@ -73,41 +73,40 @@ function drawInteraction(faces, hands) {
     /*
     Start drawing on the face here
     */
+
+
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
-    
+   
+    noStroke();
+    fill(0)
+    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
+    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
+
     fill(255); //white of eye
     ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
     ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
-    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
+    fill(132, 166, 191) //blue iris
+    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.3);
+    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.3);
 
-    //drawPoints(face.leftEye);
+    fill(255);
+    circle(leftEyeCenterX+2, leftEyeCenterY-2, leftEyeWidth*0.1);
+    circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
+    // fill(get(leftEyeCenterX, leftEyeCenterY));
+    // circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth / 2);
+    // circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth / 2);
+
+
+ //drawPoints(face.leftEye);
     drawPoints(face.leftEyebrow);
     drawPoints(face.lips);
     //drawPoints(face.rightEye);
     drawPoints(face.rightEyebrow);
     // drawPoints(face.faceOval);
 
-    noStroke();
-    fill(0)
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
-    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
-
-    // fill(get(leftEyeCenterX, leftEyeCenterY));
-    // circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth / 2);
-    // circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth / 2);
-
-
-    // drawX(rightEyeCenterX,rightEyeCenterY);
-    // drawX(leftEyeCenterX,leftEyeCenterY);
-
-
-    // drawX(noseTipX,noseTipY); 
-
-    // drawX(face.keypoints[332].x,face.keypoints[332].y);
-    // drawX(face.keypoints[103].x,face.keypoints[103].y);
 
 
     /*
@@ -143,3 +142,17 @@ function drawPoints(feature) {
   pop()
 
 }
+
+
+
+
+
+//draw x on pupils
+    // drawX(rightEyeCenterX,rightEyeCenterY);
+    // drawX(leftEyeCenterX,leftEyeCenterY);
+
+
+    // drawX(noseTipX,noseTipY); 
+
+    // drawX(face.keypoints[332].x,face.keypoints[332].y);
+    // drawX(face.keypoints[103].x,face.keypoints[103].y);
