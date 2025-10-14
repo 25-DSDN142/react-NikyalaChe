@@ -8,17 +8,20 @@ let eyeLashLeftImage, eyeLashRightImage;
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
-  myMeadowImage = loadImage('/images/meadowBackground.png');
-  eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
-  eyeLashRightImage = loadImage('/images/eyeLashRight.png');
+ 
+     myMeadowImage = loadImage('/images/meadowBackground.png');
 
-
+    eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
+    eyeLashRightImage = loadImage('/images/eyeLashRight.png');
+  
+  
 }
 
 function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
 
+  imageMode(CORNER);
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
@@ -27,6 +30,16 @@ function drawInteraction(faces, hands) {
     if (showKeypoints) {
       drawPoints(face)
       
+      let leftLashPoint = face.leftEye.keypoints[226];
+      let rightLashPoint = face.rightEye.keypoints[446];
+
+      let lashLW = leftEyeWidth * 1.2;
+      let lashLH = leftEyeHeight * 0.6;
+      let lashRW = rightEyeWidth * 1.2;
+      let lashRH = rightEyeHeight * 0.6;
+
+      image(eyeLashLeftImage, leftLashPoint.x - lashLW / 2, leftLashPoint.y - lashLH / 2, lashLW, lashLH);
+      image(eyeLashRightImage, rightLashPoint.x - lashRW / 2, rightLashPoint.y - lashRH / 2, lashRW, lashRH);
     }
 
 
@@ -83,10 +96,7 @@ function drawInteraction(faces, hands) {
 
     let noseTipX = face.keypoints[4].x;
     let noseTipY = face.keypoints[4].y;
-
-    let leftOuterCorner = face.leftEye.keypoints[130];
-    let rightOuterCorner = face.rightEye.keypoints[359];
-    /*
+/*
     Start drawing on the face here
     */
 
@@ -115,7 +125,6 @@ function drawInteraction(faces, hands) {
    
 
 
-
  //drawPoints(face.leftEye);
     drawPoints(face.leftEyebrow);
     //drawPoints(face.lips);
@@ -135,7 +144,7 @@ function drawInteraction(faces, hands) {
 }
 
 function eyeFlowers(x,y) {
-  fill(getRandomColor()); // random color
+  fill(225, 133, 141); // pink petals
   ellipse(x, y, 30, 10);
   ellipse(x, y, 10, 30);
   fill(247, 149, 29); //orange
@@ -162,7 +171,7 @@ function drawPoints(feature) {
     let element = feature.keypoints[i];
     noStroke();
     fill(217, 67, 172);
-    eyeFlowers(element.x, element.y, 5);
+    eyeFlowers(element.x, element.y, 3);
   }
   pop()
 
