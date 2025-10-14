@@ -74,22 +74,30 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
     noStroke()
-    fill(240, 215, 161);
-    // fill(get(leftEyeCenterX, leftEyeCenterY))
-
-    ellipse(faceCenterX, faceCenterY, faceWidth, faceheight);
-
+    fill(240, 215, 161); //skin tone
+    ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
+    
+    fill(255); //white of eye
+    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
+    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
     //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
 
-    // drawPoints(face.leftEye);
-    // drawPoints(face.leftEyebrow);
-    // drawPoints(face.lips);
-    // drawPoints(face.rightEye);
-    // drawPoints(face.rightEyebrow);
+    //drawPoints(face.leftEye);
+    drawPoints(face.leftEyebrow);
+    drawPoints(face.lips);
+    //drawPoints(face.rightEye);
+    drawPoints(face.rightEyebrow);
     // drawPoints(face.faceOval);
-    
 
+    noStroke();
+    fill(0)
+    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
+    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
+
+    // fill(get(leftEyeCenterX, leftEyeCenterY));
+    // circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth / 2);
+    // circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth / 2);
 
 
     // drawX(rightEyeCenterX,rightEyeCenterY);
@@ -129,7 +137,7 @@ function drawPoints(feature) {
   for (let i = 0; i < feature.keypoints.length; i++) {
     let element = feature.keypoints[i];
     noStroke();
-    fill(0, 255, 0);
+    fill(217, 67, 172);
     circle(element.x, element.y, 5);
   }
   pop()
