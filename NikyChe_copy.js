@@ -21,7 +21,7 @@ function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
 
-  
+  imageMode(CORNER);
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
@@ -95,7 +95,7 @@ function drawInteraction(faces, hands) {
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
 
-// Ai helped me here but some modification 
+// Ai helped me here but some modification have been made 
       let eyeLashLeftX = face.keypoints[33].x;
       let eyeLashLeftY = face.keypoints[33].y;
       let eyeLashRightX = face.keypoints[263].x;
