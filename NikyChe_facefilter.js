@@ -4,13 +4,16 @@ let myMeadowImage;
 
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
-  myMeadowImage = loadImage('images/meadowBackground.png');
+
+  myMeadowImage = loadImage('/images/meadowBackground.png');
+  
 
 }
 
 function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
+
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
