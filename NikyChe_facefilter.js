@@ -95,14 +95,16 @@ function drawInteraction(faces, hands) {
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
 
-
-      let eyeLashLeftX = face.keypoints[113].x;
-      let eyeLashLeftY = face.keypoints[113].y;
+// Ai helped me here but some modification have been made 
+      let eyeLashLeftX = face.keypoints[156].x;
+      let eyeLashLeftY = face.keypoints[156].y;
       let eyeLashRightX = face.keypoints[342].x;
       let eyeLashRightY = face.keypoints[342].y;
 
-      image(eyeLashLeftImage, eyeLashLeftX - 20, eyeLashLeftY - 10, 80, 40);
-      image(eyeLashRightImage, eyeLashRightX - 20, eyeLashRightY - 10, 80, 40);
+      image(eyeLashLeftImage, eyeLashLeftX - 20, eyeLashLeftY - 10, 90, 50);
+      image(eyeLashRightImage, eyeLashRightX - 20, eyeLashRightY - 10, 90, 50);
+//Ai finished here
+      
 
    // eyes
     noStroke();
