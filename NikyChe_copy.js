@@ -164,7 +164,10 @@ function drawInteraction(faces, hands) {
     drawPoints(face.rightEyebrow);
     // drawPoints(face.faceOval);
 
+
   // LIPS - DIFFERENT FROM EYEBROWS
+
+
   for (let i = 0; i < face.lips.keypoints.length; i ++) {
     let lipPoint = face.lips.keypoints[i];
     noStroke();
