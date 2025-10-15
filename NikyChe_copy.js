@@ -101,9 +101,9 @@ function drawInteraction(faces, hands) {
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      let lastLashWidth = leftEyeWidth * 2.0;
+      let lastLashWidth = leftEyeWidth * 1.6;
       let lastLashHeight = leftEyeHeight * 2.5;
-      let rightLashWidth = rightEyeWidth * 2.0;
+      let rightLashWidth = rightEyeWidth * 1.6;
       let rightLashHeight = rightEyeHeight * 2.5;
 
       image(eyeLashLeftImage, eyeLashLeftX - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
@@ -122,14 +122,13 @@ function drawInteraction(faces, hands) {
     fill(255); //white of eye
     circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth - 5);
     circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth - 5);
-
     //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
     //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
     fill(132, 166, 191) //blue iris
     circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.6);
     circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.6);
-
+    
     fill(255); //white highlight
     circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.2);
     circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.2);
@@ -153,13 +152,34 @@ function drawInteraction(faces, hands) {
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
+//flowers with 8 petals
+function eyebrowFlowers(x, y, size = 20) {
+  push();
+  translate(x, y);
 
-function eyeFlowers(x,y) {
-  fill(225, 133, 141); // pink petals
-  ellipse(x, y, 30, 10);
-  ellipse(x, y, 10, 30);
-  fill(247, 149, 29); //orange
-  circle(x,y, 5); // middle of flower
+  // sample background color
+  let bgColor = get(x/1.5, y/1.5); 
+  
+  for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
+     rotate(radians(45 * i));
+     fill(bgColor[0], bgColor[1], bgColor[2]); //sample background color for petals
+
+      // fill(225, 133, 141); // pink petals
+      ellipse(0, - size/2, size/3, size); // petal
+
+  }
+ fill(247, 149, 29); //orange
+circle(0, 0, size/2); // middle of flower
+pop();
+
+
+//flowers with 4 petals
+//function eyebrowFlowers(x,y) {
+//  fill(225, 133, 141); // pink petals
+//  ellipse(x, y, 30, 10);
+//  ellipse(x, y, 10, 30);
+//  fill(247, 149, 29); //orange
+//  circle(x,y, 10); // middle of flower
 
 }
 
@@ -182,7 +202,7 @@ function drawPoints(feature) {
     let element = feature.keypoints[i];
     noStroke();
     fill(217, 67, 172);
-    eyeFlowers(element.x, element.y, 3);
+    eyebrowFlowers(element.x, element.y, 20); // smaller flowers
   }
   pop()
 
