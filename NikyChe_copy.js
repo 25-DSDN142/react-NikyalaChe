@@ -170,7 +170,7 @@ function drawInteraction(faces, hands) {
     noStroke();
     fill(255, 0, 110);
 
-    eyebrowFlowers(lipPoint.x, lipPoint.y, 8);
+    eyebrowFlowers(lipPoint.x, lipPoint.y, 8, [255, 0, 110]); //same flowers like the brows but smaller
 
   }
   
@@ -187,7 +187,7 @@ function drawInteraction(faces, hands) {
 
 // EYEBROWS
 //flowers with 8 petals
-function eyebrowFlowers(x, y, size = 20) {
+function eyebrowFlowers(x, y, size = 20, petalColor = null) {
   push();
   translate(x, y);
 
@@ -196,8 +196,12 @@ function eyebrowFlowers(x, y, size = 20) {
   
   for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
      rotate(radians(45 * i));
-     fill(bgColor[0], bgColor[1], bgColor[2]); //sample background color for petals
-
+     if (petalColor) {
+       fill(petalColor[0], petalColor[1], petalColor[2]); // custom petal color
+     } else {
+        fill(bgColor[0], bgColor[1], bgColor[2]); //sample background color for petals
+     }
+     
       // fill(225, 133, 141); // pink petals
       ellipse(0, - size/2, size/3, size); // petal
   }
