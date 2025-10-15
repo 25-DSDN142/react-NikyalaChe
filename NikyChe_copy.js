@@ -102,9 +102,9 @@ function drawInteraction(faces, hands) {
       let eyeLashRightY = face.keypoints[263].y;
 
       let lastLashWidth = leftEyeWidth * 2.0;
-      let lastLashHeight = leftEyeHeight * 1.5;
+      let lastLashHeight = leftEyeHeight * 2.5;
       let rightLashWidth = rightEyeWidth * 2.0;
-      let rightLashHeight = rightEyeHeight * 1.5;
+      let rightLashHeight = rightEyeHeight * 2.5;
 
       image(eyeLashLeftImage, eyeLashLeftX - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
       image(eyeLashRightImage, eyeLashRightX - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
@@ -113,23 +113,26 @@ function drawInteraction(faces, hands) {
 
    // eyes
     noStroke();
-    fill(0); //outer eye - black
-    //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.2);
-    //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.2);
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
-    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
+    fill(77, 74, 67); //outer eye - grey
+    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.2);
+    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.2);
+    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
+    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
 
     fill(255); //white of eye
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
-    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth - 5);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth - 5);
+
+    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
+    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
     fill(132, 166, 191) //blue iris
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.3);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.3);
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.6);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.6);
 
     fill(255); //white highlight
-    circle(leftEyeCenterX+2, leftEyeCenterY-2, leftEyeWidth*0.1);
-    circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
+    circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.2);
+    circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.2);
    
 
 
