@@ -101,38 +101,58 @@ function drawInteraction(faces, hands) {
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      let lastLashWidth = leftEyeWidth * 1.6;
-      let lastLashHeight = leftEyeHeight * 2.5;
-      let rightLashWidth = rightEyeWidth * 1.6;
-      let rightLashHeight = rightEyeHeight * 2.5;
+      let lastLashWidth = leftEyeWidth * 2.0;
+      let lastLashHeight = leftEyeHeight * 3.5;
+      let rightLashWidth = rightEyeWidth * 2.0;
+      let rightLashHeight = rightEyeHeight * 3.5;
 
-      image(eyeLashLeftImage, eyeLashLeftX - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
-      image(eyeLashRightImage, eyeLashRightX - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
+      image(eyeLashLeftImage, eyeLashLeftX - 18 - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
+      image(eyeLashRightImage, eyeLashRightX + 18 - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
       
 
    // eyes
     noStroke();
-    fill(77, 74, 67); //outer eye - grey
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.2);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.2);
+    fill(112, 111, 111); //outer eye - grey
+    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5);
+    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5);
     //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
     //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
 
     fill(255); //white of eye
-    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth - 5);
-    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth - 5);
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth + 5);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth + 5);
     //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
     //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
     fill(132, 166, 191) //blue iris
-    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.6);
-    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.6);
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.8);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.8);
     
     fill(255); //white highlight
-    circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.2);
-    circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.2);
-   
+    circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.5);
+    circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.5);
+
+  // nose 
+  function drawNose(noseTipX, noseTipY, size = 30) {
+    push();
+    translate(noseTipX, noseTipY);
+
+    fill(245, 105, 166); //light purple
+
+    for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
+      rotate(radians(45 * i));
+      ellipse(0, -size/2, size/3, size);
+    }
+    fill(237, 212, 128);
+    circle(0, 0, size/2); // middle of flower
+
+
+    pop();
+  }
+  drawNose(noseTipX, noseTipY, 30);
+
+
 
 
  //drawPoints(face.leftEye);
@@ -166,8 +186,8 @@ function eyebrowFlowers(x, y, size = 20) {
 
       // fill(225, 133, 141); // pink petals
       ellipse(0, - size/2, size/3, size); // petal
-
   }
+  
  fill(247, 149, 29); //orange
 circle(0, 0, size/2); // middle of flower
 pop();

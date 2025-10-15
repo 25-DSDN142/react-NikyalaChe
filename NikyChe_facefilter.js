@@ -21,7 +21,7 @@ function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
 
-  
+  imageMode(CORNER);
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
@@ -95,35 +95,49 @@ function drawInteraction(faces, hands) {
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
 
-// Ai helped me here but some modification 
+// Ai helped me here but some modification have been made 
       let eyeLashLeftX = face.keypoints[33].x;
       let eyeLashLeftY = face.keypoints[33].y;
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      image(eyeLashLeftImage, eyeLashLeftX - 45, eyeLashLeftY - 25, 90, 50);
-      image(eyeLashRightImage, eyeLashRightX - 45, eyeLashRightY - 25, 90, 50);
+      let lastLashWidth = leftEyeWidth * 2.0;
+      let lastLashHeight = leftEyeHeight * 3.5;
+      let rightLashWidth = rightEyeWidth * 2.0;
+      let rightLashHeight = rightEyeHeight * 3.5;
+
+      image(eyeLashLeftImage, eyeLashLeftX - 18 - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
+      image(eyeLashRightImage, eyeLashRightX + 18 - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
       
 
    // eyes
     noStroke();
-    fill(0); //outer eye - black
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
-    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
+    fill(112, 111, 111); //outer eye - grey
+    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5);
+    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5);
+    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
+    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
 
     fill(255); //white of eye
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
-    ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth + 5);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth + 5);
+    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight/1);
+    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth, rightEyeHeight/1);
 
     fill(132, 166, 191) //blue iris
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.3);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.3);
-
+    circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.8);
+    circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.8);
+    
     fill(255); //white highlight
-    circle(leftEyeCenterX+2, leftEyeCenterY-2, leftEyeWidth*0.1);
-    circle(rightEyeCenterX+2, rightEyeCenterY-2, rightEyeWidth*0.1);
-   
+    circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.5);
+    circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.5);
+
+  // nose 
+    //fill(217, 178, 212); //light purple
+    //eyeBrowFlowers(noseTipX, noseTipY); 
+    
+
 
 
  //drawPoints(face.leftEye);
@@ -143,13 +157,34 @@ function drawInteraction(faces, hands) {
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
+//flowers with 8 petals
+function eyebrowFlowers(x, y, size = 20) {
+  push();
+  translate(x, y);
 
-function eyeFlowers(x,y) {
-  fill(225, 133, 141); // pink petals
-  ellipse(x, y, 30, 10);
-  ellipse(x, y, 10, 30);
-  fill(247, 149, 29); //orange
-  circle(x,y, 5); // middle of flower
+  // sample background color
+  let bgColor = get(x/1.5, y/1.5); 
+  
+  for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
+     rotate(radians(45 * i));
+     fill(bgColor[0], bgColor[1], bgColor[2]); //sample background color for petals
+
+      // fill(225, 133, 141); // pink petals
+      ellipse(0, - size/2, size/3, size); // petal
+  }
+  
+ fill(247, 149, 29); //orange
+circle(0, 0, size/2); // middle of flower
+pop();
+
+
+//flowers with 4 petals
+//function eyebrowFlowers(x,y) {
+//  fill(225, 133, 141); // pink petals
+//  ellipse(x, y, 30, 10);
+//  ellipse(x, y, 10, 30);
+//  fill(247, 149, 29); //orange
+//  circle(x,y, 10); // middle of flower
 
 }
 
@@ -172,7 +207,7 @@ function drawPoints(feature) {
     let element = feature.keypoints[i];
     noStroke();
     fill(217, 67, 172);
-    eyeFlowers(element.x, element.y, 3);
+    eyebrowFlowers(element.x, element.y, 20); // smaller flowers
   }
   pop()
 
