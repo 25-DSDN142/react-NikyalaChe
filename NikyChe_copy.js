@@ -101,14 +101,21 @@ function drawInteraction(faces, hands) {
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      image(eyeLashLeftImage, eyeLashLeftX - 45, eyeLashLeftY - 25, 90, 50);
-      image(eyeLashRightImage, eyeLashRightX - 45, eyeLashRightY - 25, 90, 50);
+      let lastLashWidth = leftEyeWidth * 2.0;
+      let lastLashHeight = leftEyeHeight * 1.5;
+      let rightLashWidth = rightEyeWidth * 2.0;
+      let rightLashHeight = rightEyeHeight * 1.5;
+
+      image(eyeLashLeftImage, eyeLashLeftX - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
+      image(eyeLashRightImage, eyeLashRightX - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
       
 
    // eyes
     noStroke();
     fill(0); //outer eye - black
+    //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.2);
+    //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.2);
     ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5, leftEyeHeight*1.5);
     ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5, rightEyeHeight*1.5);
 
