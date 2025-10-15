@@ -26,9 +26,9 @@ function drawInteraction(faces, hands) {
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
     let face = faces[i]; // face holds all the keypoints of the face
-    //console.log(face);
+    console.log(face.lips);
     if (showKeypoints) {
-      drawPoints(face)
+      drawPoints(face.lips)
       
        }
 
@@ -90,6 +90,7 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
+
  // FACE 
     noStroke()
     fill(240, 215, 161); //skin tone
@@ -135,23 +136,23 @@ function drawInteraction(faces, hands) {
     circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.5);
 
   // nose 
-  function drawNoseFlower(noseTipX, noseTipY, size = 30) {
-    push();
-    translate(noseTipX, noseTipY);
-
-    fill(245, 105, 166); //pink 
-
-    for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
-      rotate(radians(45 * i));
-      ellipse(0, -size/2, size/3, size);
-    }
-    fill(237, 212, 128);
-    circle(0, 0, size/2); // middle of flower
-
-
-    pop();
-  }
-  drawNoseFlower(noseTipX, noseTipY, 30);
+  //function drawNoseFlower(noseTipX, noseTipY, size = 30) {
+  //  push();
+  //  translate(noseTipX, noseTipY);
+//
+  //  fill(245, 105, 166); //pink 
+//
+  //  for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
+  //    rotate(radians(45 * i));
+  //    ellipse(0, -size/2, size/3, size);
+  //  }
+  //  fill(237, 212, 128);
+  //  circle(0, 0, size/2); // middle of flower
+//
+//
+  //  pop();
+  //}
+  //drawNoseFlower(noseTipX, noseTipY, 30);
 
 
 
@@ -168,8 +169,9 @@ function drawInteraction(faces, hands) {
     let lipPoint = face.lips.keypoints[i];
     noStroke();
     fill(255, 0, 110);
-    
-    ellipse(lipPoint.x, lipPoint.y, 5, 5); // smaller flowers
+
+    eyebrowFlowers(lipPoint.x, lipPoint.y, 8);
+
   }
   
     /*
@@ -180,6 +182,8 @@ function drawInteraction(faces, hands) {
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
+
+
 
 // EYEBROWS
 //flowers with 8 petals
