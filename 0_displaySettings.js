@@ -52,7 +52,7 @@ let showKeypoints = false;
 
 
 // What is the program looking for
-const numberOfFaces = 1;
+const numberOfFaces = 21;
 const numberOfHands = 2; 
 
 

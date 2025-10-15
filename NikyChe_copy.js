@@ -90,11 +90,12 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
-   // face outline
+ // FACE 
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
 
+  // EYELASHES
 // Ai helped me here but some modification have been made 
       let eyeLashLeftX = face.keypoints[33].x;
       let eyeLashLeftY = face.keypoints[33].y;
@@ -111,7 +112,7 @@ function drawInteraction(faces, hands) {
 //Ai finished here
       
 
-   // eyes
+   // EYES
     noStroke();
     fill(112, 111, 111); //outer eye - grey
     circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5);
@@ -134,11 +135,11 @@ function drawInteraction(faces, hands) {
     circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.5);
 
   // nose 
-  function drawNose(noseTipX, noseTipY, size = 30) {
+  function drawNoseFlower(noseTipX, noseTipY, size = 30) {
     push();
     translate(noseTipX, noseTipY);
 
-    fill(245, 105, 166); //light purple
+    fill(245, 105, 166); //pink 
 
     for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
       rotate(radians(45 * i));
@@ -150,7 +151,7 @@ function drawInteraction(faces, hands) {
 
     pop();
   }
-  drawNose(noseTipX, noseTipY, 30);
+  drawNoseFlower(noseTipX, noseTipY, 30);
 
 
 
@@ -162,8 +163,15 @@ function drawInteraction(faces, hands) {
     drawPoints(face.rightEyebrow);
     // drawPoints(face.faceOval);
 
-
-
+  // LIPS - DIFFERENT FROM EYEBROWS
+  for (let i = 0; i < face.lips.keypoints.length; i ++) {
+    let lipPoint = face.lips.keypoints[i];
+    noStroke();
+    fill(255, 0, 110);
+    
+    ellipse(lipPoint.x, lipPoint.y, 5, 5); // smaller flowers
+  }
+  
     /*
     Stop drawing on the face here
     */
@@ -172,6 +180,8 @@ function drawInteraction(faces, hands) {
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
+
+// EYEBROWS
 //flowers with 8 petals
 function eyebrowFlowers(x, y, size = 20) {
   push();
@@ -221,7 +231,7 @@ function drawPoints(feature) {
   for (let i = 0; i < feature.keypoints.length; i++) {
     let element = feature.keypoints[i];
     noStroke();
-    fill(217, 67, 172);
+    fill(217, 67, 172); 
     eyebrowFlowers(element.x, element.y, 20); // smaller flowers
   }
   pop()
