@@ -133,6 +133,8 @@ function drawInteraction(faces, hands) {
     circle(leftEyeCenterX+2, leftEyeCenterY - 5, leftEyeWidth*0.5);
     circle(rightEyeCenterX+2, rightEyeCenterY - 5, rightEyeWidth*0.5);
 
+    
+
   // nose 
     //fill(217, 178, 212); //light purple
     //eyeBrowFlowers(noseTipX, noseTipY); 

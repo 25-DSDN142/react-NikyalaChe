@@ -3,7 +3,7 @@
 let myMeadowImage;
 let eyeLashLeftImage, eyeLashRightImage;
 
-let isMouthOpen = false;
+let eyesClosed = false;
 
 
 function prepareInteraction() {
@@ -122,8 +122,10 @@ function drawInteraction(faces, hands) {
 
       noStroke();  
       fill(64, 62, 63); //outer eye - grey
-      circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
-      circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
+      ellipse(leftEyeCenterX - 10, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight+80);
+      ellipse(rightEyeCenterX + 10, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight+80);
+      //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
+      //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
       //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.8, leftEyeHeight*2.3);
       //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.8, rightEyeHeight*2.3);
   
@@ -152,6 +154,13 @@ function drawInteraction(faces, hands) {
       circle(rightEyeCenterX + 1, rightEyeCenterY - 5, rightEyeWidth*0.3);
       //circle(leftEyeCenterX - 2, leftEyeCenterY - 5, leftEyeWidth*0.2);
       //circle(rightEyeCenterX - 2, rightEyeCenterY - 5, rightEyeWidth*0.2);
+
+    checkIfEyesOpen(face);
+    if (eyesClosed) {
+      circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
+      circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
+      
+    }
 
     // ---- END OF EYES ----
 
@@ -233,6 +242,22 @@ function drawInteraction(faces, hands) {
 }
 
 
+function checkIfEyesOpen(face) {
+
+  let upperEye = face.keypoints[27]
+  let lowerEye = face.keypoints[23]
+  // ellipse(lowerLip.x,lowerLip.y,20)
+  // ellipse(upperLip.x,upperLip.y,20)
+
+  let d = dist(upperEye.x, upperEye.y, lowerEye.x, lowerEye.y);
+  //console.log(d)
+  if (d < 20) {
+    isEyesOpen = false;
+  } else {
+    isEyesOpen = true;
+  }
+
+}
 
 // EYEBROWS
 //flowers with 8 petals
