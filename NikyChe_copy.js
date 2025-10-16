@@ -6,6 +6,14 @@ let eyeLashLeftImage, eyeLashRightImage;
 let eyesClosed = false;
 
 
+// Define the exterior lip landmark indices for drawing the outer lip contour
+let lipsExterior = [267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61, 185, 40, 39, 37, 0];
+
+// Define the interior lip landmark indices for drawing the inner lip contour
+let lipsInterior = [13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95, 78, 191, 80, 81, 82];
+
+
+
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
@@ -15,6 +23,7 @@ function prepareInteraction() {
     eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
     eyeLashRightImage = loadImage('/images/eyeLashRight.png');
   
+    
 }
 
 
@@ -25,8 +34,8 @@ function drawInteraction(faces, hands) {
   image(myMeadowImage, 0, 0, 1280, 960);
 
 
-  
   imageMode(CORNER);
+
 
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
@@ -230,24 +239,64 @@ function drawInteraction(faces, hands) {
     drawPoints(face.leftEyebrow);
     //drawPoints(face.lips);
     //drawPoints(face.rightEye);
-    drawPoints(face.rightEyebrow);
+    drawPoints(face.rightEyebrow); 
     // drawPoints(face.faceOval);
 
 
    //LIPS - DIFFERENT FROM EYEBROWS
-   beginShape();
-   for (let i = 0; i < face.lips.keypoints.length; i ++) {
-    let lipPoint = face.lips.keypoints[i];
-     fill(255, 0, 110);
-    noStroke();
-   
-   
+  // beginShape();
+  // for (let i = 0; i < face.lips.keypoints.length; i ++) {
+  //  let lipPoint = face.lips.keypoints[i];
+  //   fill(255, 0, 110);
+  //  noStroke();
+  // 
+  // 
+//
+  //  vertex(lipPoint.x, lipPoint.y); //same flowers like the brows but smaller
+//
+  //}
 
-    vertex(lipPoint.x, lipPoint.y); //same flowers like the brows but smaller
+ // Thank you Jack B. Du for these lip lists! - refered to a video from Coding Train for this 
+ // //seperates the inner and outer liness of lips
 
+//connect lip keypoints with lines - fill them in but only half of lips done
+  //let lipPoints = face.lips.keypoints;
+  stroke (255, 0, 110);
+  strokeWeight (2);
+  //noFill();
+  fill(255, 0, 110);
+  beginShape();
+  for (let i = 0; i < lipsExterior.length; i++) {
+    let index = lipsExterior[i];
+    let keypoints = face.keypoints[index]; 
+
+    vertex(keypoints.x, keypoints.y);
   }
+   endShape (CLOSE);
+
+  stroke (255, 0, 110);
+  strokeWeight (2);
+  //noFill();
+  fill(238, 162, 163);
+  beginShape();
+  for (let i = 0; i < lipsInterior.length; i++) {
+    let index = lipsInterior[i];
+    let keypoints = face.keypoints[index]; 
+
+    vertex(keypoints.x, keypoints.y);
+  }
+   endShape (CLOSE);
+
+   //mouth is closed/open
+   let topLip = face.keypoints[13];
+   let bottomLip = face.keypoints[14];
+   fill(255, 0, 110);
+   let d = dist(topLip.x, topLip.y, bottomLip.x, bottomLip.y);
+   
+   }
  
 
+//
    //fill lips with color - curveVertex to make them curved - FINAL VERSION
   //let lipPoints = face.lips.keypoints
   // noStroke();
@@ -278,7 +327,7 @@ function drawInteraction(faces, hands) {
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
-}
+
 
 
 
