@@ -95,6 +95,18 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
+//connect lip keypoints with lines 
+ //  let lips = face.lips
+ // beginShape();
+ // for (let i = 0; i < lips.keypoints.length; i ++) {
+ //   let lipPoint = face.lip.keypoints[i];
+ //   fill(255, 0, 255);
+ //   noStroke();
+ //   vertex(face.lip.keypoints.x, face.lip.keypoints.y);
+//
+ // }
+ // endShape();
+  
 
  // FACE 
     noStroke()
@@ -223,30 +235,30 @@ function drawInteraction(faces, hands) {
 
 
    //LIPS - DIFFERENT FROM EYEBROWS
+   beginShape();
+   for (let i = 0; i < face.lips.keypoints.length; i ++) {
+    let lipPoint = face.lips.keypoints[i];
+     fill(255, 0, 110);
+    noStroke();
+   
+   
+
+    vertex(lipPoint.x, lipPoint.y); //same flowers like the brows but smaller
+
+  }
+ 
 
    //fill lips with color - curveVertex to make them curved - FINAL VERSION
-  let lipPoints = face.lips.keypoints
-   noStroke();
-   fill(255, 0, 110, 150); //pinky transparent lips
-   beginShape();
-   for (let i = 0; i < lipPoints.length; i++) {
-     curveVertex(lipPoints[i].x, lipPoints[i].y);
-   }
-   endShape(CLOSE);
+  //let lipPoints = face.lips.keypoints
+  // noStroke();
+  // fill(255, 0, 110, 150); //pinky transparent lips
+  // beginShape();
+  // for (let i = 0; i < lipPoints.length; i++) {
+  //   curveVertex(lipPoints[i].x, lipPoints[i].y);
+  // }
+  // endShape(CLOSE);
 
-  //connect lip keypoints with lines - fill them in but only half of lips done
-  //let lipPoints = face.lips.keypoints;
-  //stroke(255, 0, 110);
-  //strokeWeight(2);
-  //fill(255, 0, 110);
-  //beginShape();
-  //for (let i = 0; i < 11; i++) {
-  //  vertex(lipPoints[i].x, lipPoints[i].y);
-//
-  //}
-  //endShape(CLOSE);
-
-  // draw flowers on lip keypoints
+   // draw flowers on lip keypoints
   //for (let i = 0; i < face.lips.keypoints.length; i ++) {
     //let lipPoint = face.lips.keypoints[i];
     //noStroke();
@@ -267,6 +279,7 @@ function drawInteraction(faces, hands) {
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
+
 
 
 function checkIfEyesOpen(face) {
