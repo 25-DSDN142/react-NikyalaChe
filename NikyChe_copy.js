@@ -176,17 +176,27 @@ function drawInteraction(faces, hands) {
 
 
    //LIPS - DIFFERENT FROM EYEBROWS
-   //connect lip keypoints with lines 
-  let lipPoints = face.lips.keypoints;
-  stroke(255, 0, 110);
-  strokeWeight(2);
-  fill(255, 0, 110);
-  beginShape();
-  for (let i = 0; i < 11; i++) {
-    vertex(lipPoints[i].x, lipPoints[i].y);
+//fill lips with color
+  let lipPoints = face.lips.keypoints
+   noStroke();
+   fill(255, 0, 110, 150); //pinky transparent lips
+   beginShape();
+   for (let i = 0; i < lipPoints.length; i++) {
+     curveVertex(lipPoints[i].x, lipPoints[i].y);
+   }
+   endShape(CLOSE);
 
-  }
-  endShape(CLOSE);
+  //connect lip keypoints with lines - fill them in but only half of lips done
+  //let lipPoints = face.lips.keypoints;
+  //stroke(255, 0, 110);
+  //strokeWeight(2);
+  //fill(255, 0, 110);
+  //beginShape();
+  //for (let i = 0; i < 11; i++) {
+  //  vertex(lipPoints[i].x, lipPoints[i].y);
+//
+  //}
+  //endShape(CLOSE);
 
   // draw flowers on lip keypoints
   //for (let i = 0; i < face.lips.keypoints.length; i ++) {
