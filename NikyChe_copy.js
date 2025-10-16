@@ -3,7 +3,6 @@
 let myMeadowImage;
 let eyeLashLeftImage, eyeLashRightImage;
 
-let eyesClosed = false;
 
 
 // Define the exterior lip landmark indices for drawing the outer lip contour
@@ -121,6 +120,8 @@ function drawInteraction(faces, hands) {
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
+    
+
 
   // EYELASHES
 // Ai helped me here but some modification have been made 
@@ -203,13 +204,6 @@ function drawInteraction(faces, hands) {
       //circle(leftEyeCenterX - 2, leftEyeCenterY - 5, leftEyeWidth*0.2);
       //circle(rightEyeCenterX - 2, rightEyeCenterY - 5, rightEyeWidth*0.2);
 
-    checkIfEyesOpen(face);
-    if (eyesClosed) {
-      circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
-      circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
-      
-    }
-
     // ---- END OF EYES ----
 
 
@@ -288,12 +282,23 @@ function drawInteraction(faces, hands) {
    endShape (CLOSE);
 
    //mouth is closed/open
-   let topLip = face.keypoints[13];
-   let bottomLip = face.keypoints[14];
-   fill(255, 0, 110);
-   let d = dist(topLip.x, topLip.y, bottomLip.x, bottomLip.y);
-   
-   }
+ // let topLip = face.keypoints[13];
+ // let bottomLip = face.keypoints[14];
+ // 
+ // let d = dist(topLip.x, topLip.y, bottomLip.x, bottomLip.y);
+
+
+ 
+  //let cheekLeft = face.keypoints[50];
+  //let cheekRight = face.keypoints[280];
+//
+ //
+  // fill(255, 221, 147);
+   //ellipse(cheekLeft.x, cheekLeft.y, 30, 10);
+   //ellipse(cheekRight.x, cheekRight.y, 10, 30);
+   //fill(247, 149, 29); //orange
+   //circle(cheekLeft.x,cheekRight.x,cheekLeft.y, cheekRight.y, cheekWidth); // middle of flower
+  }
  
 
 //
@@ -330,23 +335,6 @@ function drawInteraction(faces, hands) {
 
 
 
-
-function checkIfEyesOpen(face) {
-
-  let upperEye = face.keypoints[27]
-  let lowerEye = face.keypoints[23]
-  // ellipse(lowerLip.x,lowerLip.y,20)
-  // ellipse(upperLip.x,upperLip.y,20)
-
-  let d = dist(upperEye.x, upperEye.y, lowerEye.x, lowerEye.y);
-  //console.log(d)
-  if (d < 20) {
-    isEyesOpen = false;
-  } else {
-    isEyesOpen = true;
-  }
-
-}
 
 // EYEBROWS
 //flowers with 8 petals
@@ -415,7 +403,6 @@ function drawPoints(feature) {
   pop()
 
 }
-
 
 
 //draw x on pupils
