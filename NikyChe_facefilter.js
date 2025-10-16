@@ -177,15 +177,6 @@ function eyebrowFlowers(x, y, size = 20) {
 circle(0, 0, size/2); // middle of flower
 pop();
 
-
-//flowers with 4 petals
-//function eyebrowFlowers(x,y) {
-//  fill(225, 133, 141); // pink petals
-//  ellipse(x, y, 30, 10);
-//  ellipse(x, y, 10, 30);
-//  fill(247, 149, 29); //orange
-//  circle(x,y, 10); // middle of flower
-
 }
 
 function drawX(X, Y) {
