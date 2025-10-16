@@ -15,14 +15,19 @@ function prepareInteraction() {
     eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
     eyeLashRightImage = loadImage('/images/eyeLashRight.png');
   
-  
 }
+
+
+
 
 function drawInteraction(faces, hands) {
 
   image(myMeadowImage, 0, 0, 1280, 960);
 
+
+  
   imageMode(CORNER);
+
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
@@ -111,38 +116,42 @@ function drawInteraction(faces, hands) {
       image(eyeLashLeftImage, eyeLashLeftX - 18 - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
       image(eyeLashRightImage, eyeLashRightX + 18 - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
-      
+     
 
    // EYES - FINAL VERSION - MAKE CHANGES TO TYPE BEFORE SUBMITTING
 
-    noStroke();  
-    fill(121, 121, 121); //outer eye - grey
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.5);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.5);
-    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.8, leftEyeHeight*2.3);
-    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.8, rightEyeHeight*2.3);
-
-    let middleEyeColor = color(255);
-    middleEyeColor.setAlpha(160);
-    fill(middleEyeColor) //white of eye
-    //fill(255); //white of eye
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.8);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.8);
-    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight*1.4);
-    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight*1.4);
-
-    let irisColor = color(132, 166, 191);
-    irisColor.setAlpha(180);
-    fill(irisColor) //blue iris
-    //fill(132, 166, 191) //blue iris
-    circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.5);
-    circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.5);
-    //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.8, leftEyeHeight*0.8);
-    //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.8, rightEyeHeight*0.8);
-
-    fill(255); //white highlight
-    circle(leftEyeCenterX - 2, leftEyeCenterY - 5, leftEyeWidth*0.2);
-    circle(rightEyeCenterX - 2, rightEyeCenterY - 5, rightEyeWidth*0.2);
+      noStroke();  
+      fill(64, 62, 63); //outer eye - grey
+      circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
+      circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
+      //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.8, leftEyeHeight*2.3);
+      //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.8, rightEyeHeight*2.3);
+  
+      //let middleEyeColor = color(255); - light transparency white
+      //middleEyeColor.setAlpha(160);
+      //fill(middleEyeColor) //white of eye
+      fill(255); //white of eye
+      circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth + 5);
+      circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth + 5);
+      //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight*1.4);
+      //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight*1.4);
+  
+      let irisColor = color(132, 166, 191);
+      irisColor.setAlpha(180);
+      fill(irisColor) //blue iris
+      //fill(132, 166, 191) //blue iris
+      circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.8);
+      circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.8);
+      //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.5);
+      //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.5);
+      //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.8, leftEyeHeight*0.8);
+      //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.8, rightEyeHeight*0.8);
+  
+      fill(255); //white highlight
+      circle(leftEyeCenterX + 1, leftEyeCenterY - 5, leftEyeWidth*0.3);
+      circle(rightEyeCenterX + 1, rightEyeCenterY - 5, rightEyeWidth*0.3);
+      //circle(leftEyeCenterX - 2, leftEyeCenterY - 5, leftEyeWidth*0.2);
+      //circle(rightEyeCenterX - 2, rightEyeCenterY - 5, rightEyeWidth*0.2);
 
     // ---- END OF EYES ----
 
@@ -259,17 +268,24 @@ pop();
 //  fill(247, 149, 29); //orange
 //  circle(x,y, 10); // middle of flower
 
+   
+    // drawX(face.keypoints[332].x,face.keypoints[332].y);
+    // drawX(face.keypoints[103].x,face.keypoints[103].y);
+
+    // drawX(noseTipX,noseTipY); 
+
 }
 
-//function drawX(X, Y) {
-//  push()
-//
-//  strokeWeight(15)
-//  line(X - 20, Y - 20, X + 20, Y + 20)
-//  line(X - 20, Y + 20, X + 20, Y - 20)
-//
-//  pop()
-//}
+
+function drawX(X, Y) {
+  push()
+
+  strokeWeight(15)
+  line(X - 20, Y - 20, X + 20, Y + 20)
+  line(X - 20, Y + 20, X + 20, Y - 20)
+
+  pop()
+}
 
 
 // This function draw's a dot on all the keypoints. It can be passed a whole face, or part of one. 
