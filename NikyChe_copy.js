@@ -27,11 +27,10 @@ function drawInteraction(faces, hands) {
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
     let face = faces[i]; // face holds all the keypoints of the face
-    console.log(face.lips);
+    //console.log(face.keypoints);
     if (showKeypoints) {
-      drawPoints(face.lips)
-      
-       }
+      drawPoints(face.lips);
+    }
 
 
 
@@ -176,17 +175,28 @@ function drawInteraction(faces, hands) {
     // drawPoints(face.faceOval);
 
 
-  // LIPS - DIFFERENT FROM EYEBROWS
-
-
-  for (let i = 0; i < face.lips.keypoints.length; i ++) {
-    let lipPoint = face.lips.keypoints[i];
-    noStroke();
-    fill(255, 0, 110);
-
-    eyebrowFlowers(lipPoint.x, lipPoint.y, 8, [255, 0, 110]); //same flowers like the brows but smaller
+   //LIPS - DIFFERENT FROM EYEBROWS
+   //connect lip keypoints with lines 
+  let lipPoints = face.lips.keypoints;
+  stroke(255, 0, 110);
+  strokeWeight(2);
+  fill(255, 0, 110);
+  beginShape();
+  for (let i = 0; i < 11; i++) {
+    vertex(lipPoints[i].x, lipPoints[i].y);
 
   }
+  endShape(CLOSE);
+
+  // draw flowers on lip keypoints
+  //for (let i = 0; i < face.lips.keypoints.length; i ++) {
+    //let lipPoint = face.lips.keypoints[i];
+    //noStroke();
+    //fill(255, 0, 110);
+
+    //eyebrowFlowers(lipPoint.x, lipPoint.y, 8, [255, 0, 110]); //same flowers like the brows but smaller
+
+  //}
   
     /*
     Stop drawing on the face here
