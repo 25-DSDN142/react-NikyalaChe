@@ -119,39 +119,66 @@ function drawInteraction(faces, hands) {
      
 
    // EYES - FINAL VERSION - MAKE CHANGES TO TYPE BEFORE SUBMITTING
-
+     //outer eye
       noStroke();  
       fill(64, 62, 63); //outer eye - grey
-      ellipse(leftEyeCenterX - 10, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight+80);
-      ellipse(rightEyeCenterX + 10, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight+80);
-      //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
+      ellipse(leftEyeCenterX - 10, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight+70);
+      ellipse(rightEyeCenterX + 10, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight+70);
+      //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4); // other eyes i like
       //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
       //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.8, leftEyeHeight*2.3);
       //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.8, rightEyeHeight*2.3);
-  
+      
+     // middle white after outer
       //let middleEyeColor = color(255); - light transparency white
       //middleEyeColor.setAlpha(160);
       //fill(middleEyeColor) //white of eye
       fill(255); //white of eye
-      circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth + 5);
-      circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth + 5);
+      ellipse(leftEyeCenterX - 10, leftEyeCenterY + 4, leftEyeWidth*1.1, leftEyeHeight+50);
+      ellipse(rightEyeCenterX + 10, rightEyeCenterY + 4, rightEyeWidth*1.1, rightEyeHeight+50)
+      //circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth + 5); //other eye option I like 
+      //circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth + 5);
       //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4, leftEyeHeight*1.4);
       //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4, rightEyeHeight*1.4);
   
-      let irisColor = color(132, 166, 191);
-      irisColor.setAlpha(180);
-      fill(irisColor) //blue iris
-      //fill(132, 166, 191) //blue iris
-      circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.8);
-      circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.8);
+     //ring around irs
+      fill(64, 62, 63);
+      ellipse(leftEyeCenterX - 14, leftEyeCenterY + 8, leftEyeWidth*0.7, leftEyeHeight + 30); 
+      ellipse(rightEyeCenterX + 14, rightEyeCenterY +8, rightEyeWidth*0.7, rightEyeHeight + 30);
+
+     //iris
+      //let irisColor = color(132, 166, 191);
+      //irisColor.setAlpha(180);
+      //fill(irisColor) //blue iris
+      fill(132, 166, 191) //blue iris
+      ellipse(leftEyeCenterX - 14, leftEyeCenterY + 11, leftEyeWidth*0.6, leftEyeHeight + 23); 
+      ellipse(rightEyeCenterX + 14, rightEyeCenterY + 11, rightEyeWidth*0.6, rightEyeHeight + 23);
+      fill(64, 62, 63); //black iris -inside
+      ellipse(leftEyeCenterX - 14, leftEyeCenterY + 10, leftEyeWidth*0.4, leftEyeHeight + 13); 
+      ellipse(rightEyeCenterX + 14, rightEyeCenterY + 10, rightEyeWidth*0.4, rightEyeHeight + 13);
+
+      //circle(leftEyeCenterX + 5, leftEyeCenterY + 5, leftEyeWidth*0.8); // other eyes I like
+      //circle(rightEyeCenterX + 5, rightEyeCenterY + 5, rightEyeWidth*0.8);
       //circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.5);
       //circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.5);
       //ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*0.8, leftEyeHeight*0.8);
       //ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*0.8, rightEyeHeight*0.8);
-  
+     
+     //highlights
       fill(255); //white highlight
-      circle(leftEyeCenterX + 1, leftEyeCenterY - 5, leftEyeWidth*0.3);
-      circle(rightEyeCenterX + 1, rightEyeCenterY - 5, rightEyeWidth*0.3);
+      circle(leftEyeCenterX - 20, leftEyeCenterY - 2, leftEyeWidth*0.2); 
+      circle(rightEyeCenterX + 20, rightEyeCenterY - 2, rightEyeWidth*0.2);
+
+      circle(leftEyeCenterX - 15, leftEyeCenterY + 3, leftEyeWidth*0.1); 
+      circle(rightEyeCenterX + 15, rightEyeCenterY + 3, rightEyeWidth*0.1);
+
+      circle(leftEyeCenterX - 20, leftEyeCenterY + 13, leftEyeWidth*0.05); 
+      circle(rightEyeCenterX + 20, rightEyeCenterY + 13, rightEyeWidth*0.05);
+
+
+
+      //circle(leftEyeCenterX + 1, leftEyeCenterY - 5, leftEyeWidth*0.3); // other eyes I like
+      //circle(rightEyeCenterX + 1, rightEyeCenterY - 5, rightEyeWidth*0.3);
       //circle(leftEyeCenterX - 2, leftEyeCenterY - 5, leftEyeWidth*0.2);
       //circle(rightEyeCenterX - 2, rightEyeCenterY - 5, rightEyeWidth*0.2);
 
