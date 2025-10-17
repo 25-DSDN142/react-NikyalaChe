@@ -17,7 +17,7 @@ function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
  
-     myMeadowImage = loadImage('images/meadowBackground.png');
+     myMeadowImage = loadImage('images/meadowBackground.png', () => console.log("background loaded"))
      crownImage = loadImage('images/crown.png');
 
 
@@ -32,8 +32,9 @@ function prepareInteraction() {
 
 function drawInteraction(faces, hands) {
 
+  
   image(myMeadowImage, 0, 0, 1280, 960);
-
+  
 
   imageMode(CORNER);
 
@@ -124,16 +125,53 @@ function drawInteraction(faces, hands) {
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
     
 
-//CROWN
-let crownCenterX = face.keypoints[10].x;
-let crownCenterY = face.keypoints[10].y;
+// CROWN --- crown moving with head tilt 
+
+
+let crownCenterX = faceCenterX;
+let crownCenterY = faceCenterY - faceheight * 0.75; //moving the crown above the head
+
+//size per the face
 let crownWidth = faceWidth * 1.0;
 let crownHeight = faceheight * 0.5;
+
+let leftEye = face.keypoints[33];
+let rightEye = face.keypoints[263];
+
+//estimate the tilt by comparing the eye positions
+if (face.rightEye && face.leftEye) {
+let distanceX = rightEye.x - leftEye.x;
+let distanceY = rightEye.x - leftEye.y;
+//let distanceX = face.rightEye.centerX - face.leftEye.centerX;
+//let distanceY = face.rightEye.centerY - face.leftEye.centerY;
+let tilt = atan2(distanceY, distanceX); 
+
+
+//draw crown rotated
+push();
+translate(crownCenterX, crownCenterY);
+rotate(tilt);
+imageMode(CENTER);
+image(crownImage, 0, 0, crownWidth, crownHeight);
+pop();
   
-imageMode(CENTER); //made it center with forhead and using the key point 10
-image(crownImage, crownCenterX - 20, crownCenterY - 50, crownWidth, crownHeight)
-//image(crownImage, crownImageX + 105 - faceheight, crownImageY - faceWidth ,crownImageWidth *1, crownImageHeight - 15);
+
 imageMode(CORNER);
+}
+  
+
+
+//CROWN - normal code placement
+
+//let crownCenterX = face.keypoints[10].x;
+//let crownCenterY = face.keypoints[10].y;
+//let crownWidth = faceWidth * 1.0;
+//let crownHeight = faceheight * 0.5;
+//  
+//imageMode(CENTER); //made it center with forhead and using the key point 10
+//image(crownImage, crownCenterX - 20, crownCenterY - 50, crownWidth, crownHeight)
+////image(crownImage, crownImageX + 105 - faceheight, crownImageY - faceWidth ,crownImageWidth *1, crownImageHeight - 15);
+//imageMode(CORNER);
 
 
   // EYELASHES
