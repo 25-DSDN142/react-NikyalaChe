@@ -128,31 +128,36 @@ function drawInteraction(faces, hands) {
 // CROWN --- crown moving with head tilt 
 
 
-let crownCenterX = faceCenterX;
-let crownCenterY = faceCenterY - faceheight * 0.75; //moving the crown above the head
+let leftHead = face.keypoints[234];
+let rightHead = face.keypoints[454];
+
+let crownCenterX = (leftHead.x + rightHead.x) / 2;
+let crownCenterY = face.faceOval.centerY - face.faceOval.height * 0.7; //moving the crown above the head
+
 
 //size per the face
 let crownWidth = faceWidth * 1.0;
 let crownHeight = faceheight * 0.5;
 
-let leftEye = face.keypoints[33];
-let rightEye = face.keypoints[263];
+//let leftEye = face.keypoints[33];
+//let rightEye = face.keypoints[263];
 
 //estimate the tilt by comparing the eye positions
 if (face.rightEye && face.leftEye) {
-let distanceX = rightEye.x - leftEye.x;
-let distanceY = rightEye.x - leftEye.y;
+let distanceX = rightHead.x - leftHead.x;
+let distanceY = rightHead.y - leftHead.y;
 //let distanceX = face.rightEye.centerX - face.leftEye.centerX;
 //let distanceY = face.rightEye.centerY - face.leftEye.centerY;
-let tilt = atan2(distanceY, distanceX); 
+let headTilt = atan2(distanceY, distanceX); 
 
 
 //draw crown rotated
+
 push();
 translate(crownCenterX, crownCenterY);
-rotate(tilt);
+rotate(headTilt);
 imageMode(CENTER);
-image(crownImage, 0, 0, crownWidth, crownHeight);
+image(crownImage, -30, 0, crownWidth, crownHeight);
 pop();
   
 
