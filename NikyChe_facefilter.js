@@ -2,11 +2,10 @@
 /* load images here */
 let myMeadowImage;
 let eyeLashLeftImage, eyeLashRightImage;
-let crownImage;
 
 
  // Thank you Jack B. Du for these lip lists! - refered to a video from Coding Train for this 
- 
+ // //seperates the inner and outer liness of lips
 // Define the exterior lip landmark indices for drawing the outer lip contour
 let lipsExterior = [267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61, 185, 40, 39, 37, 0];
 
@@ -19,26 +18,19 @@ function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
  
-     myMeadowImage = loadImage('images/meadowBackground.png');
-
-
-    eyeLashLeftImage = loadImage('images/eyeLashLeft.png');
-    eyeLashRightImage = loadImage('images/eyeLashRight.png');
+     myMeadowImage = loadImage('images/meadowBackground.png', () => console.log("background loaded"))
+     crownImage = loadImage('images/crown.png');
+     eyeLashLeftImage = loadImage('images/eyeLashLeft.png');
+     eyeLashRightImage = loadImage('images/eyeLashRight.png');
   
-    
 }
-
-
-
 
 function drawInteraction(faces, hands) {
 
+  
   image(myMeadowImage, 0, 0, 1280, 960);
-
-
+  
   imageMode(CORNER);
-
-
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
   for (let i = 0; i < faces.length; i++) {
@@ -47,7 +39,6 @@ function drawInteraction(faces, hands) {
     if (showKeypoints) {
       drawPoints(face.lips);
     }
-
 
 
     /*
@@ -71,17 +62,7 @@ function drawInteraction(faces, hands) {
     let leftEyeCenterY = face.leftEye.centerY;
     let leftEyeWidth = face.leftEye.width;
     let leftEyeHeight = face.leftEye.height;
-    // Left eyebrow
-    let leftEyebrowCenterX = face.leftEyebrow.centerX;
-    let leftEyebrowCenterY = face.leftEyebrow.centerY;
-    let leftEyebrowWidth = face.leftEyebrow.width;
-    let leftEyebrowHeight = face.leftEyebrow.height;
-
-    // Lips
-    let lipsCenterX = face.lips.centerX;
-    let lipsCenterY = face.lips.centerY;
-    let lipsWidth = face.lips.width;
-    let lipsHeight = face.lips.height;
+ 
 
     // Right eye
     let rightEyeCenterX = face.rightEye.centerX;
@@ -89,14 +70,6 @@ function drawInteraction(faces, hands) {
     let rightEyeWidth = face.rightEye.width;
     let rightEyeHeight = face.rightEye.height;
 
-    // Right eyebrow
-    let rightEyebrowCenterX = face.rightEyebrow.centerX;
-    let rightEyebrowCenterY = face.rightEyebrow.centerY;
-    let rightEyebrowWidth = face.rightEyebrow.width;
-    let rightEyebrowHeight = face.rightEyebrow.height;
-
-    let noseTipX = face.keypoints[4].x;
-    let noseTipY = face.keypoints[4].y;
 /*
     Start drawing on the face here
     */
@@ -107,7 +80,42 @@ function drawInteraction(faces, hands) {
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
     
 
+// CROWN --- crown moving with head tilt 
 
+
+let leftHead = face.keypoints[234];
+let rightHead = face.keypoints[454];
+
+let crownCenterX = (leftHead.x + rightHead.x) / 2;
+let crownCenterY = face.faceOval.centerY - face.faceOval.height * 0.7; //moving the crown above the head
+
+
+//size per the face
+let crownWidth = faceWidth * 1.0;
+let crownHeight = faceheight * 0.5;
+
+
+//estimate the tilt by comparing the eye positions
+if (face.rightEye && face.leftEye) {
+let distanceX = rightHead.x - leftHead.x;
+let distanceY = rightHead.y - leftHead.y;
+
+let headTilt = atan2(distanceY, distanceX); 
+
+
+//draw crown rotated
+
+push();
+translate(crownCenterX, crownCenterY);
+rotate(headTilt);
+imageMode(CENTER);
+image(crownImage, -30, 0, crownWidth, crownHeight);
+pop();
+  
+
+imageMode(CORNER);
+}
+  
   // EYELASHES
 // Ai helped me here but some modification have been made 
       let eyeLashLeftX = face.keypoints[33].x;
@@ -115,12 +123,12 @@ function drawInteraction(faces, hands) {
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      let lastLashWidth = leftEyeWidth * 2.0;
-      let lastLashHeight = leftEyeHeight * 3.5;
+      let leftLashWidth = leftEyeWidth * 2.0;
+      let leftLashHeight = leftEyeHeight * 3.5;
       let rightLashWidth = rightEyeWidth * 2.0;
       let rightLashHeight = rightEyeHeight * 3.5;
 
-      image(eyeLashLeftImage, eyeLashLeftX - 18 - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
+      image(eyeLashLeftImage, eyeLashLeftX - 18 - leftLashWidth/2, eyeLashLeftY - leftLashHeight/2, leftLashWidth, leftLashHeight);
       image(eyeLashRightImage, eyeLashRightX + 18 - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
      
@@ -174,8 +182,8 @@ function drawInteraction(faces, hands) {
     // drawPoints(face.faceOval);
 
 
-   //----- LIPS BEGIN ------
- 
+
+// ----- LIPS -----
 //connect lip keypoints with lines - fill them in but only half of lips done
   //let lipPoints = face.lips.keypoints;
   stroke (255, 0, 110);
@@ -203,12 +211,9 @@ function drawInteraction(faces, hands) {
     vertex(keypoints.x, keypoints.y);
   }
    endShape (CLOSE);
-
-  }
+ }
  
   // ----- END OF LIPS -----
-
-
 
     /*
     Stop drawing on the face here
@@ -217,9 +222,6 @@ function drawInteraction(faces, hands) {
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
-
-
-
 
 // EYEBROWS
 //flowers with 8 petals
@@ -250,16 +252,6 @@ pop();
 
 }
 
-
-function drawX(X, Y) {
-  push()
-
-  strokeWeight(15)
-  line(X - 20, Y - 20, X + 20, Y + 20)
-  line(X - 20, Y + 20, X + 20, Y - 20)
-
-  pop()
-}
 
 
 // This function draw's a dot on all the keypoints. It can be passed a whole face, or part of one. 
