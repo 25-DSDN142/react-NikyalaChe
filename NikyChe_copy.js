@@ -17,10 +17,12 @@ function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
  
-     myMeadowImage = loadImage('/images/meadowBackground.png');
+     myMeadowImage = loadImage('images/meadowBackground.png');
+     crownImage = loadImage('images/crown.png');
 
-    eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
-    eyeLashRightImage = loadImage('/images/eyeLashRight.png');
+
+    eyeLashLeftImage = loadImage('images/eyeLashLeft.png');
+    eyeLashRightImage = loadImage('images/eyeLashRight.png');
   
     
 }
@@ -121,6 +123,12 @@ function drawInteraction(faces, hands) {
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
     
+//CROWN
+let crownImageX = face.keypoints[10].x;
+let crownImageY = face.keypoints[10].y;
+let crownImageWidth = 
+  
+image(crownImage, crownImageX, crownImageY, );
 
 
   // EYELASHES
@@ -130,12 +138,12 @@ function drawInteraction(faces, hands) {
       let eyeLashRightX = face.keypoints[263].x;
       let eyeLashRightY = face.keypoints[263].y;
 
-      let lastLashWidth = leftEyeWidth * 2.0;
-      let lastLashHeight = leftEyeHeight * 3.5;
+      let leftLashWidth = leftEyeWidth * 2.0;
+      let leftLashHeight = leftEyeHeight * 3.5;
       let rightLashWidth = rightEyeWidth * 2.0;
       let rightLashHeight = rightEyeHeight * 3.5;
 
-      image(eyeLashLeftImage, eyeLashLeftX - 18 - lastLashWidth/2, eyeLashLeftY - lastLashHeight/2, lastLashWidth, lastLashHeight);
+      image(eyeLashLeftImage, eyeLashLeftX - 18 - leftLashWidth/2, eyeLashLeftY - leftLashHeight/2, leftLashWidth, leftLashHeight);
       image(eyeLashRightImage, eyeLashRightX + 18 - rightLashWidth/2, eyeLashRightY - rightLashHeight/2, rightLashWidth, rightLashHeight);
 //Ai finished here
      

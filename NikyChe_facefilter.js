@@ -2,17 +2,30 @@
 /* load images here */
 let myMeadowImage;
 let eyeLashLeftImage, eyeLashRightImage;
+let crownImage;
 
-let eyesClosed = false;
+
+ // Thank you Jack B. Du for these lip lists! - refered to a video from Coding Train for this 
+ 
+// Define the exterior lip landmark indices for drawing the outer lip contour
+let lipsExterior = [267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61, 185, 40, 39, 37, 0];
+
+// Define the interior lip landmark indices for drawing the inner lip contour
+let lipsInterior = [13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95, 78, 191, 80, 81, 82];
+
 
 
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 
-    myMeadowImage = loadImage('/images/meadowBackground.png');
-    eyeLashLeftImage = loadImage('/images/eyeLashLeft.png');
-    eyeLashRightImage = loadImage('/images/eyeLashRight.png');
+ 
+     myMeadowImage = loadImage('images/meadowBackground.png');
+
+
+    eyeLashLeftImage = loadImage('images/eyeLashLeft.png');
+    eyeLashRightImage = loadImage('images/eyeLashRight.png');
   
+    
 }
 
 
@@ -23,8 +36,8 @@ function drawInteraction(faces, hands) {
   image(myMeadowImage, 0, 0, 1280, 960);
 
 
-  
   imageMode(CORNER);
+
 
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
@@ -35,11 +48,6 @@ function drawInteraction(faces, hands) {
       drawPoints(face.lips);
     }
 
-
-
-
-    //image(eyeLashLeftImage, leftOuterCorner.x, leftOuterCorner.y);
-    //image(eyeLashRightImage, rightOuterCorner.x, rightOuterCorner.y);
 
 
     /*
@@ -93,11 +101,12 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
-
  // FACE 
     noStroke()
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
+    
+
 
   // EYELASHES
 // Ai helped me here but some modification have been made 
@@ -134,14 +143,13 @@ function drawInteraction(faces, hands) {
       ellipse(rightEyeCenterX + 14, rightEyeCenterY +8, rightEyeWidth*0.7, rightEyeHeight + 30);
 
      //iris
-     fill(132, 166, 191) //blue iris
+      fill(132, 166, 191) //blue iris
       ellipse(leftEyeCenterX - 14, leftEyeCenterY + 11, leftEyeWidth*0.6, leftEyeHeight + 23); 
       ellipse(rightEyeCenterX + 14, rightEyeCenterY + 11, rightEyeWidth*0.6, rightEyeHeight + 23);
       fill(64, 62, 63); //black iris -inside
       ellipse(leftEyeCenterX - 14, leftEyeCenterY + 10, leftEyeWidth*0.4, leftEyeHeight + 13); 
       ellipse(rightEyeCenterX + 14, rightEyeCenterY + 10, rightEyeWidth*0.4, rightEyeHeight + 13);
 
-      
      //highlights
       fill(255); //white highlight
       circle(leftEyeCenterX - 20, leftEyeCenterY - 2, leftEyeWidth*0.2); 
@@ -153,35 +161,8 @@ function drawInteraction(faces, hands) {
       circle(leftEyeCenterX - 20, leftEyeCenterY + 13, leftEyeWidth*0.05); 
       circle(rightEyeCenterX + 20, rightEyeCenterY + 13, rightEyeWidth*0.05);
 
-    checkIfEyesOpen(face);
-    if (eyesClosed) {
-      circle(leftEyeCenterX, leftEyeCenterY, leftEyeWidth*1.4);
-      circle(rightEyeCenterX, rightEyeCenterY, rightEyeWidth*1.4);
-      
-    }
 
     // ---- END OF EYES ----
-
-
-  // nose 
-  //function drawNoseFlower(noseTipX, noseTipY, size = 30) {
-  //  push();
-  //  translate(noseTipX, noseTipY);
-//
-  //  fill(245, 105, 166); //pink 
-//
-  //  for (let i = 0; i < 8; i++) { // 8 petals, every 45 degrees
-  //    rotate(radians(45 * i));
-  //    ellipse(0, -size/2, size/3, size);
-  //  }
-  //  fill(237, 212, 128);
-  //  circle(0, 0, size/2); // middle of flower
-//
-//
-  //  pop();
-  //}
-  //drawNoseFlower(noseTipX, noseTipY, 30);
-
 
 
 
@@ -189,23 +170,42 @@ function drawInteraction(faces, hands) {
     drawPoints(face.leftEyebrow);
     //drawPoints(face.lips);
     //drawPoints(face.rightEye);
-    drawPoints(face.rightEyebrow);
+    drawPoints(face.rightEyebrow); 
     // drawPoints(face.faceOval);
 
 
-   //LIPS - DIFFERENT FROM EYEBROWS
+   //----- LIPS BEGIN ------
+ 
+//connect lip keypoints with lines - fill them in but only half of lips done
+  //let lipPoints = face.lips.keypoints;
+  stroke (255, 0, 110);
+  strokeWeight (2);
+  //noFill();
+  fill(255, 0, 110);
+  beginShape();
+  for (let i = 0; i < lipsExterior.length; i++) {
+    let index = lipsExterior[i];
+    let keypoints = face.keypoints[index]; 
 
-   //fill lips with color - curveVertex to make them curved - FINAL VERSION
-  let lipPoints = face.lips.keypoints
-   noStroke();
-   fill(255, 0, 110, 150); //pinky transparent lips
-   beginShape();
-   for (let i = 0; i < lipPoints.length; i++) {
-     curveVertex(lipPoints[i].x, lipPoints[i].y);
-   }
-   endShape(CLOSE);
+    vertex(keypoints.x, keypoints.y);
+  }
+   endShape (CLOSE);
 
-  //}
+  stroke (255, 0, 110);
+  strokeWeight (2);
+  //noFill();
+  fill(238, 162, 163);
+  beginShape();
+  for (let i = 0; i < lipsInterior.length; i++) {
+    let index = lipsInterior[i];
+    let keypoints = face.keypoints[index]; 
+
+    vertex(keypoints.x, keypoints.y);
+  }
+   endShape (CLOSE);
+
+  }
+ 
   // ----- END OF LIPS -----
 
 
@@ -217,25 +217,9 @@ function drawInteraction(faces, hands) {
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
-}
 
 
-function checkIfEyesOpen(face) {
 
-  let upperEye = face.keypoints[27]
-  let lowerEye = face.keypoints[23]
-  // ellipse(lowerLip.x,lowerLip.y,20)
-  // ellipse(upperLip.x,upperLip.y,20)
-
-  let d = dist(upperEye.x, upperEye.y, lowerEye.x, lowerEye.y);
-  //console.log(d)
-  if (d < 20) {
-    isEyesOpen = false;
-  } else {
-    isEyesOpen = true;
-  }
-
-}
 
 // EYEBROWS
 //flowers with 8 petals
@@ -262,10 +246,7 @@ function eyebrowFlowers(x, y, size = 20, petalColor = null) {
 circle(0, 0, size/2); // middle of flower
 pop();
 
-    // drawX(face.keypoints[332].x,face.keypoints[332].y);
-    // drawX(face.keypoints[103].x,face.keypoints[103].y);
 
-    // drawX(noseTipX,noseTipY); 
 
 }
 
@@ -294,15 +275,3 @@ function drawPoints(feature) {
   pop()
 
 }
-
-
-
-//draw x on pupils
-    // drawX(rightEyeCenterX,rightEyeCenterY);
-    // drawX(leftEyeCenterX,leftEyeCenterY);
-
-
-    // drawX(noseTipX,noseTipY); 
-
-    // drawX(face.keypoints[332].x,face.keypoints[332].y);
-    // drawX(face.keypoints[103].x,face.keypoints[103].y);
