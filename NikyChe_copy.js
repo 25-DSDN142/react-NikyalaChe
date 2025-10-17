@@ -123,12 +123,17 @@ function drawInteraction(faces, hands) {
     fill(240, 215, 161); //skin tone
     ellipse(faceCenterX, faceCenterY, faceWidth, faceheight); //outer eye
     
+
 //CROWN
-let crownImageX = face.keypoints[10].x;
-let crownImageY = face.keypoints[10].y;
-let crownImageWidth = 
+let crownCenterX = face.keypoints[10].x;
+let crownCenterY = face.keypoints[10].y;
+let crownWidth = faceWidth * 1.0;
+let crownHeight = faceheight * 0.5;
   
-image(crownImage, crownImageX, crownImageY, );
+imageMode(CENTER); //made it center with forhead and using the key point 10
+image(crownImage, crownCenterX - 20, crownCenterY - 50, crownWidth, crownHeight)
+//image(crownImage, crownImageX + 105 - faceheight, crownImageY - faceWidth ,crownImageWidth *1, crownImageHeight - 15);
+imageMode(CORNER);
 
 
   // EYELASHES
